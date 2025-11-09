@@ -1,5 +1,7 @@
 # RPI Zero 2W AI chat gateway
 
+![hardware setup](/imgs/hw.jpeg)
+
 Based on ElevenLabs tutorial [Build a Voice Assistant with Agents Platform on a Raspberry Pi](https://elevenlabs.io/docs/cookbooks/agents-platform/raspberry-pi-voice-assistant), but resolving issues with running the code on [Raspberry Pi Zero 2W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/).
 
 ## Summary of changes
