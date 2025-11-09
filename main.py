@@ -131,8 +131,7 @@ def start_mic_stream():
         # Create a new stream instance
         mic_stream = SimpleMicStream(
             window_length_secs=1.5,
-            # *** FIX 1: Use a smaller, more stable sliding window ***
-            # 0.75s is very large and can be unstable. 0.25s is more standard.
+            # *** FIX: Use a smaller, more stable sliding window ***
             sliding_window_secs=0.25,
         )
         mic_stream.start_stream()
@@ -146,9 +145,6 @@ def stop_mic_stream():
     """Stop the microphone stream safely"""
     global mic_stream
     try:
-        # *** THIS IS THE CORRECT FIX ***
-        # SimpleMicStream has no public 'stop_stream' method.
-        # We must access the internal PyAudio objects to shut it down.
         if mic_stream:
             # 1. Check for the PyAudio stream object
             if hasattr(mic_stream, 'stream') and mic_stream.stream:
@@ -187,7 +183,6 @@ while True:
     try:
         # --- State 1: Conversation is Active ---
         # This state is now handled inside the 'wakeword_detected' block.
-        # If convai_active is True, the loop will just wait.
         if convai_active:
             time.sleep(0.1)
             continue
@@ -262,7 +257,6 @@ while True:
                 time.sleep(1)
                 continue
 
-        # This is now the ONLY job of the main loop in this state:
         # Get a frame and queue it up.
         # This call will block until a new frame is ready,
         # perfectly servicing the audio buffer.
